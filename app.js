@@ -20,11 +20,18 @@ con.on('open', () => {
     console.log('connected to the database ...')
 })
 
+
+//to make uploads folder accessible from browser
+app.use('/uploads', express.static('uploads'))
+
+
 //for using JSON correctly
 app.use(express.json())
 
 //if we have: /aliens, then use aliens.js 
 const productRouter = require('./routes/products')
+const orderRouter = require('./routes/orders')
 app.use('/products', productRouter)
+app.use('/orders', orderRouter)
 
 module.exports = app;
