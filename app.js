@@ -10,6 +10,7 @@ const app = express();
 
 
 //connection to the local database
+mongoose.set('useCreateIndex', true); // this is a solution of some deprecated stuff of mongoose
 const url = 'mongodb://localhost/nodejsapi';
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -31,7 +32,9 @@ app.use(express.json())
 //if we have: /aliens, then use aliens.js 
 const productRouter = require('./routes/products')
 const orderRouter = require('./routes/orders')
+const userRouter = require('./routes/users')
 app.use('/products', productRouter)
 app.use('/orders', orderRouter)
+app.use('/users', userRouter)
 
 module.exports = app;
